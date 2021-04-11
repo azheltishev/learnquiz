@@ -2,9 +2,11 @@ package lv.progmeistars;
 
 import lv.progmeistars.parser.CsvParser;
 import lv.progmeistars.parser.WordTranslationTypeData;
+import lv.progmeistars.word.WordParser;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,6 +14,7 @@ public class Main {
 
 
     public static void main(String[] args) {
+        var wordParser = new WordParser();
         var parser = new CsvParser();
         Random random = new Random();
 
@@ -30,11 +33,13 @@ public class Main {
         for (WordTranslationTypeData data : askedWords) {
             System.out.println(data.getSourceLanguage());
             String next = scanner.next();
+
+            List<String> parsedTranslations = wordParser.parse(data.getTranslationLanguage());
             if (data.getTranslationLanguage().contains(next.strip())) {
                 System.out.println("correct!");
                 score++;
             } else {
-                System.out.printf("wrong translation, correct would be : %s !%n", data.getTranslationLanguage());
+                System.out.printf("wrong translation, correct would be : %s !%n", parsedTranslations);
             }
         }
 

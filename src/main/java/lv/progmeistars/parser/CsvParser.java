@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class CsvParser {
 
     public List<WordTranslationTypeData> parseFile(File file) {
         try {
-            FileReader fileReader = new FileReader(file);
+            FileReader fileReader = new FileReader(file, StandardCharsets.UTF_8);
             List<String[]> lines = readAll(fileReader);
 
             var list = new ArrayList<WordTranslationTypeData>();
